@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Switch, Route } from "react-router-dom";
+import Home from "./screens/Home";
+import TeamPage from "./screens/TeamPage";
+import PlayerPage from "./screens/PlayerPage";
+import Layout from "./components/Layout";
+import { teamInfo } from "./utilities/teamInfo";
+import { TeamContext } from "./utilities/TeamContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TeamContext.Provider value={teamInfo}>
+      <Layout>
+        <Switch>
+          <Route path="/teams/:teamId">
+            <TeamPage />
+          </Route>
+          <Route path="/players/:playerId">
+            <PlayerPage />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Layout>
+    </TeamContext.Provider>
   );
 }
 

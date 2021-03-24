@@ -1,0 +1,1 @@
+export const API_KEY = process.env.REACT_APP_NBA_API_KEY
