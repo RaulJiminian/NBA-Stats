@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import BarGraphPoints from './BarGraphPoints';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,6 +77,8 @@ export default function PlayerScrollTab({playerProfile}) {
     })
   })
 
+  // make seperate data arrays for each stat. That is, points: [29, 25, 22, 20, 21]
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -97,7 +100,9 @@ export default function PlayerScrollTab({playerProfile}) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        Item One
+        {playerAverages && 
+          <BarGraphPoints playerAverages={playerAverages}/>
+        }
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

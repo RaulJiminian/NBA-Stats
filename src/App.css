@@ -18,3 +18,18 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+#chart {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+  padding: 1rem;
+  margin: 0 2rem;
+}
+
+.bar {
+  fill: #3f51b5;
+}
+
+.label {
+  fill: #3f51b5;
+  font-size: 14px;
+}
