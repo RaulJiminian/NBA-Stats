@@ -6,6 +6,7 @@ import { Divider, makeStyles } from "@material-ui/core";
 import PlayerScrollTab from "../components/PlayerScrollTab";
 import PlayerProfileCard from "../components/PlayerProfileCard";
 import PlayerDraftCard from "../components/PlayerDraftCard";
+import PlayerImageCard from "../components/PlayerImageCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,13 +39,12 @@ function PlayerPage() {
     fetchPlayerProfile();
   }, [playerId]);
 
-  // Need Photo
-
   return (
     <div>
       <div className={classes.root}>
         {playerProfile &&
           <>
+          <PlayerImageCard playerProfile={playerProfile}/>
           <PlayerProfileCard playerProfile={playerProfile} />
           <PlayerDraftCard playerProfile={playerProfile}/>
           </>

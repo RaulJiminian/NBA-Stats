@@ -6,6 +6,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import { useContext } from 'react';
+import { TeamContext } from "../utilities/TeamContext";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,27 +33,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PlayerProfileCard({playerProfile}) {
+export default function PlayerProfileCard({ playerProfile }) {
+  const teamInfo = useContext(TeamContext);
   const classes = useStyles();
+
+  const currentTeam = teamInfo.find((team) => team.id === playerProfile?.team?.id)
 
   return (
     <Card className={classes.root}>
       <Typography className={classes.headingMargin} variant="h5" component="h2">
-        Player Information
+      {playerProfile?.full_name}
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        { currentTeam?.name} <span>&#183;</span> #{playerProfile?.jersey_number} <span>&#183;</span> {playerProfile?.position}
       </Typography>
       <CardContent className={classes.contentPadding}>
         <List
           className={classes.root}
-          aria-label="Player Information"
+          aria-label="Player Profile Information"
         >
-          <Divider light />
-          <ListItem button className={classes.listHeight}>
-            <ListItemText primary="Player Name:" />
-            <ListItemText
-              className={classes.listValue}
-              primary={playerProfile?.full_name}
-            />
-          </ListItem>
           <Divider light />
           <ListItem button className={classes.listHeight}>
             <ListItemText primary="Height:" />
@@ -69,18 +70,10 @@ export default function PlayerProfileCard({playerProfile}) {
           </ListItem>
           <Divider light />
           <ListItem button className={classes.listHeight}>
-            <ListItemText primary="Position:" />
+            <ListItemText primary="Age:" />
             <ListItemText
               className={classes.listValue}
-              primary={playerProfile?.position}
-            />
-          </ListItem>
-          <Divider light />
-          <ListItem button className={classes.listHeight}>
-            <ListItemText primary="Jersey Number:" />
-            <ListItemText
-              className={classes.listValue}
-              primary={playerProfile?.jersey_number}
+              primary={playerProfile?.birthdate}
             />
           </ListItem>
           <Divider light />
@@ -93,10 +86,18 @@ export default function PlayerProfileCard({playerProfile}) {
           </ListItem>
           <Divider light />
           <ListItem button className={classes.listHeight}>
-            <ListItemText primary="Birthdate:" />
+            <ListItemText primary="College:" />
             <ListItemText
               className={classes.listValue}
-              primary={playerProfile?.birthdate}
+              primary={playerProfile?.college}
+            />
+          </ListItem>
+          <Divider light />
+          <ListItem button className={classes.listHeight}>
+            <ListItemText primary="Hometown:" />
+            <ListItemText
+              className={classes.listValue}
+              primary={playerProfile?.birth_place}
             />
           </ListItem>
           <Divider light />
