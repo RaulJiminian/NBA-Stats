@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { API_KEY } from "../config/base";
 import { Divider, makeStyles } from "@material-ui/core";
 import PlayerScrollTab from "../components/PlayerScrollTab";
+import PlayerProfileCard from "../components/PlayerProfileCard";
+import PlayerDraftCard from "../components/PlayerDraftCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,21 +40,16 @@ function PlayerPage() {
 
   // Need Photo
 
-  // playerProfile.full_name
-  // playerProfile.height
-  // playerProfile.weight
-  // playerProfile.position
-  // playerProfile.jersey_number
-  // playerProfile.experience // Rename to "Yrs in league"
-  // playerProfile.birthdate // convert to age ("1988-03-14")
-
-  // playerProfile.draft.year
-  // playerProfile.draft.round
-  // playerProfile.draft.pick
-
   return (
     <div>
-      <div className={classes.root}></div>
+      <div className={classes.root}>
+        {playerProfile &&
+          <>
+          <PlayerProfileCard playerProfile={playerProfile} />
+          <PlayerDraftCard playerProfile={playerProfile}/>
+          </>
+        }
+      </div>
       <Divider className={classes.divider} />
       {playerProfile && <PlayerScrollTab playerProfile={playerProfile} />}
     </div>
