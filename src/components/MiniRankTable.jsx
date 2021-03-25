@@ -14,14 +14,6 @@ const useStyles = makeStyles({
   },
 });
 
-// function createData(conference, division, playoff) {
-//   return { conference, division, playoff };
-// }
-
-// const row = [
-//   createData(6.0, 24, 4.0),
-// ];
-
 export default function MiniRankTable({rankings}) {
   const classes = useStyles();
   const conf_rank = rankings?.conf_rank
@@ -34,14 +26,12 @@ export default function MiniRankTable({rankings}) {
           <TableRow>
             <TableCell align="center">Conference Ranking</TableCell>
             <TableCell align="center">Division Ranking</TableCell>
-            {/* <TableCell align="center">Playoff Status</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
             <TableRow key={conf_rank}>
               <TableCell align="center">{conf_rank}</TableCell>
               <TableCell align="center">{div_rank}</TableCell>
-              {/* <TableCell align="center">{row[0].playoff}</TableCell> */}
             </TableRow>
         </TableBody>
       </Table>

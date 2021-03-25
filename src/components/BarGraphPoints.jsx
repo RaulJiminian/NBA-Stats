@@ -69,7 +69,7 @@ function BarGraphPoints({ playerAverages }) {
       .attr('font-size', `${labelFontSize}`)
       .classed('label', true);
     
-  }, [windowWidth]);
+  }, [windowWidth, playerAverages]);
 
   return (
     <>

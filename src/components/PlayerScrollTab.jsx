@@ -77,8 +77,6 @@ export default function PlayerScrollTab({playerProfile}) {
     })
   })
 
-  // make seperate data arrays for each stat. That is, points: [29, 25, 22, 20, 21]
-
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
