@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import BarGraphPoints from './BarGraphPoints';
+import BarGraphRebounds from './BarGraphRebounds';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -103,7 +104,9 @@ export default function PlayerScrollTab({playerProfile}) {
         }
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+      {playerAverages && 
+          <BarGraphRebounds playerAverages={playerAverages}/>
+        }
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
