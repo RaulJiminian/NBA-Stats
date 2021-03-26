@@ -1,6 +1,6 @@
 import { Grid, makeStyles } from "@material-ui/core";
 import Nav from "./Nav";
-// Import Footer
+import Footer from "./Footer";
 
 const useStyles = makeStyles({
   root: {
@@ -11,6 +11,7 @@ const useStyles = makeStyles({
   },
   mainContainer: {
     overflow: "hidden",
+    marginBottom: "25px",
   }
 })
 
@@ -27,7 +28,7 @@ function Layout(props) {
           {props.children}
         </Grid>
         <Grid item xs={12}>
-          {/* Footer */}
+          <Footer />
         </Grid>
       </Grid>
     </div>
