@@ -266,7 +266,7 @@ export default function TeamRoster({teamSeasonStats}) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 15, 20]}
           component="div"
-          count={rows?.length}
+          count={20}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}

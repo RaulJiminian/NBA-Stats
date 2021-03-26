@@ -1,9 +1,6 @@
-import { useContext } from "react";
-import { TeamContext } from "../utilities/TeamContext";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
-import emptyAvatar from "../assets/empty-avatar.svg"
 
 const useStyles = makeStyles({
   root: {
@@ -11,14 +8,15 @@ const useStyles = makeStyles({
   },
   imgFit: {
     objectFit: "contain",
+    marginTop: 25,
   },
 });
 
-export default function PlayerImageCard({playerProfile}) {
-  const teamInfo = useContext(TeamContext);
+export default function PlayerImageCard({ playerProfile, playerPhotoId }) {
   const classes = useStyles();
 
-  const currentTeam = teamInfo.find((team) => team.id === playerProfile?.team?.id);
+  const currentPlayer = playerPhotoId.find((player) => player.firstName === playerProfile?.first_name && player.lastName === playerProfile?.last_name)
+  const imgUrl = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${currentPlayer.personId}.png`
 
   return (
     <Card className={classes.root}>
@@ -26,7 +24,7 @@ export default function PlayerImageCard({playerProfile}) {
         component="img"
         alt="player profile"
         height="350"
-        image={emptyAvatar}
+        image={imgUrl}
         className={classes.imgFit}
         title="player profile"
       />

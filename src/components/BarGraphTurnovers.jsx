@@ -16,11 +16,11 @@ function useWindowSize() {
   return size;
 }
 
-export default function BarGraphPoints({ playerAverages }) {
+export default function BarGraphTurnovers({ playerAverages }) {
   const [windowWidth] = useWindowSize();
   const svgRef = useRef();
   
-  playerAverages = playerAverages?.sort((a, b) => a.year - b.year);
+  playerAverages = playerAverages.sort((a, b) => a.year - b.year);
   
   useEffect(() => {
     const MARGINS = { topXL: 30, topL: 20, topM: 20, topS: 10, bottomXL: 15, bottomL: 10, bottomM: 10, bottomS: 5 };
@@ -44,7 +44,7 @@ export default function BarGraphPoints({ playerAverages }) {
     xScale.domain(playerAverages?.map((d) => d.year));
 
     const yScale = scaleLinear().range([CHART_HEIGHT, 0]);
-    yScale.domain([0, max(playerAverages, (d) => d.stats[0].points) + 5]);
+    yScale.domain([0, max(playerAverages, (d) => d.stats[0].turnovers) + 5]);
 
     chart.append("g").call(axisBottom(xScale).tickSizeOuter(0)).attr('transform', `translate(0, ${CHART_HEIGHT})`).attr('color', '#3f51b5').attr('font-size', `${tickFontSize}`);
 
@@ -54,17 +54,17 @@ export default function BarGraphPoints({ playerAverages }) {
       .join("rect")
       .classed("bar", true)
       .attr("width", xScale.bandwidth())
-      .attr("height", (data) => CHART_HEIGHT - yScale(data.stats[0].points))
+      .attr("height", (data) => CHART_HEIGHT - yScale(data.stats[0].turnovers))
       .attr("x", (data) => xScale(data.year))
-      .attr("y", (data) => yScale(data.stats[0].points));
+      .attr("y", (data) => yScale(data.stats[0].turnovers));
 
     chart
       .selectAll(".label")
       .data(playerAverages)
       .join("text")
-      .text((data) => data.stats[0].points)
+      .text((data) => data.stats[0].turnovers)
       .attr("x", data => xScale(data.year) + xScale.bandwidth() / 2)
-      .attr("y", data => yScale(data.stats[0].points) - 5)
+      .attr("y", data => yScale(data.stats[0].turnovers) - 5)
       .attr('text-anchor', 'middle')
       .attr('font-size', `${labelFontSize}`)
       .classed('label', true);

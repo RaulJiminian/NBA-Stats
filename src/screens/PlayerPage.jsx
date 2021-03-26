@@ -25,15 +25,20 @@ const useStyles = makeStyles((theme) => ({
 
 function PlayerPage() {
   const [playerProfile, setPlayerProfile] = useState({});
+  const [playerPhotoId, setPlayerPhotoId] = useState(null);
   const { playerId } = useParams();
   const classes = useStyles();
 
   useEffect(() => {
     const fetchPlayerProfile = async () => {
       const urlPlayerProfile = `https://api.sportradar.us/nba/trial/v7/en/players/${playerId}/profile.json?api_key=${API_KEY}`;
+      const urlPlayerPhotoId = "http://data.nba.net/data/10s/prod/v1/2020/players.json"
 
       const response = await axios(urlPlayerProfile);
+      const responsePhotoId = await axios(urlPlayerPhotoId);
+
       setPlayerProfile(response.data);
+      setPlayerPhotoId(responsePhotoId.data.league.standard);
     };
 
     fetchPlayerProfile();
@@ -42,13 +47,13 @@ function PlayerPage() {
   return (
     <div>
       <div className={classes.root}>
-        {playerProfile &&
+        {playerPhotoId && 
+          <PlayerImageCard playerPhotoId={playerPhotoId} playerProfile={playerProfile}/>
+        }
           <>
-          <PlayerImageCard playerProfile={playerProfile}/>
           <PlayerProfileCard playerProfile={playerProfile} />
           <PlayerDraftCard playerProfile={playerProfile}/>
           </>
-        }
       </div>
       <Divider className={classes.divider} />
       {playerProfile && <PlayerScrollTab playerProfile={playerProfile} />}

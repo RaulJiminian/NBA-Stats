@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -6,9 +7,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import { useContext } from 'react';
+import { useContext } from "react";
 import { TeamContext } from "../utilities/TeamContext";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,33 +31,59 @@ const useStyles = makeStyles((theme) => ({
   contentPadding: {
     paddingTop: 20,
   },
+  anchorDisplay: {
+    color: "#3f51b5",
+    fontWeight: 500,
+  }
 }));
 
 export default function PlayerProfileCard({ playerProfile }) {
   const teamInfo = useContext(TeamContext);
   const classes = useStyles();
 
-  const currentTeam = teamInfo.find((team) => team.id === playerProfile?.team?.id)
+  const currentTeam = teamInfo.find(
+    (team) => team.id === playerProfile?.team?.id
+  );
+
+  function getAge(dateString) {
+    let today = new Date();
+    let birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+  function convertInchesToFeet(totalInches) {
+    const feet = Math.floor(totalInches / 12);
+    const inches = totalInches % 12;
+
+    return `${feet}'${inches}"`;
+  }
+
+  const formattedHeight = convertInchesToFeet(playerProfile?.height);
+  const age = getAge(playerProfile?.birthdate);
 
   return (
     <Card className={classes.root}>
       <Typography className={classes.headingMargin} variant="h5" component="h2">
-      {playerProfile?.full_name}
+        {playerProfile?.full_name}
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
-        { currentTeam?.name} <span>&#183;</span> #{playerProfile?.jersey_number} <span>&#183;</span> {playerProfile?.position}
+        <Link className={classes.anchorDisplay} to={`/teams/${currentTeam?.id}`}>{currentTeam?.name}</Link>{" "}
+        <span>&#183;</span> #{playerProfile?.jersey_number} <span>&#183;</span>{" "}
+        {playerProfile?.position}
       </Typography>
       <CardContent className={classes.contentPadding}>
-        <List
-          className={classes.root}
-          aria-label="Player Profile Information"
-        >
+        <List className={classes.root} aria-label="Player Profile Information">
           <Divider light />
           <ListItem button className={classes.listHeight}>
             <ListItemText primary="Height:" />
             <ListItemText
               className={classes.listValue}
-              primary={`${playerProfile?.height} in`}
+              primary={`${formattedHeight}`}
             />
           </ListItem>
           <Divider light />
@@ -71,10 +97,7 @@ export default function PlayerProfileCard({ playerProfile }) {
           <Divider light />
           <ListItem button className={classes.listHeight}>
             <ListItemText primary="Age:" />
-            <ListItemText
-              className={classes.listValue}
-              primary={playerProfile?.birthdate}
-            />
+            <ListItemText className={classes.listValue} primary={`${age}`} />
           </ListItem>
           <Divider light />
           <ListItem button className={classes.listHeight}>

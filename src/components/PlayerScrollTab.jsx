@@ -8,6 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import BarGraphPoints from './BarGraphPoints';
 import BarGraphRebounds from './BarGraphRebounds';
+import BarGraphAssists from './BarGraphAssists';
+import BarGraphSteals from './BarGraphSteals';
+import BarGraphBlocks from './BarGraphBlocks';
+import BarGraphTurnovers from './BarGraphTurnovers';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -99,26 +103,24 @@ export default function PlayerScrollTab({playerProfile}) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        {playerAverages && 
+        {playerAverages &&
           <BarGraphPoints playerAverages={playerAverages}/>
         }
       </TabPanel>
       <TabPanel value={value} index={1}>
-      {playerAverages && 
-          <BarGraphRebounds playerAverages={playerAverages}/>
-        }
+        <BarGraphRebounds playerAverages={playerAverages}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <BarGraphAssists playerAverages={playerAverages}/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Four
+        <BarGraphSteals playerAverages={playerAverages}/>
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Five
+        <BarGraphBlocks playerAverages={playerAverages}/>
       </TabPanel>
       <TabPanel value={value} index={5}>
-        Item Six
+        <BarGraphTurnovers playerAverages={playerAverages}/>
       </TabPanel>
     </div>
   );
