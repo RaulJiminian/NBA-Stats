@@ -46,7 +46,7 @@ export default function BarGraphBlocks({ playerAverages }) {
     const yScale = scaleLinear().range([CHART_HEIGHT, 0]);
     yScale.domain([0, max(playerAverages, (d) => d.stats[0].blocks) + 5]);
 
-    chart.append("g").call(axisBottom(xScale).tickSizeOuter(0)).attr('transform', `translate(0, ${CHART_HEIGHT})`).attr('color', '#3f51b5').attr('font-size', `${tickFontSize}`);
+    chart.append("g").call(axisBottom(xScale).tickSizeOuter(0)).attr('transform', `translate(0, ${CHART_HEIGHT})`).attr('color', '#15EA23').attr('font-size', `${tickFontSize}`);
 
     chart
       .selectAll(".bar")

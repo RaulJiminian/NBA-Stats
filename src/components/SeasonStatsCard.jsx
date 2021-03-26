@@ -10,7 +10,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
   },
   headingMargin: {
-    marginTop: 25,
+    margin: "25px auto 0 auto",
+    borderBottom: "2px solid #EA15DC",
+    paddingBottom: 5,
+    width: "90%",
   },
   contentPadding: {
     paddingTop: 20,

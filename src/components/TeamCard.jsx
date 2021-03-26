@@ -14,6 +14,9 @@ const useStyles = makeStyles({
   media: {
     height: 185,
   },
+  contentBorder: {
+    borderBottom: "2px solid #EA15DC",
+  }
 });
 
 export default function TeamCard({ id, teamName, teamBanner }) {
@@ -27,7 +30,7 @@ export default function TeamCard({ id, teamName, teamBanner }) {
           image={teamBanner}
           title={teamName}
         />
-        <CardContent>
+        <CardContent className={classes.contentBorder}>
           <Typography gutterBottom variant="h5" component="h2">
             {teamName}
           </Typography>

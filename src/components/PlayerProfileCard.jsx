@@ -32,8 +32,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 20,
   },
   anchorDisplay: {
-    color: "#3f51b5",
-    fontWeight: 500,
+    color: "#15EA23",
+    fontWeight: 600,
+    fontSize: "20px",
   }
 }));
 

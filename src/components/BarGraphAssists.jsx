@@ -8,9 +8,9 @@ function useWindowSize() {
     function updateSize() {
       setSize([window.innerWidth, window.innerHeight]);
     }
-    window.addEventListener('resize', updateSize);
+    window.addEventListener("resize", updateSize);
     updateSize();
-    return () => window.removeEventListener('resize', updateSize);
+    return () => window.removeEventListener("resize", updateSize);
   }, []);
 
   return size;
@@ -19,17 +19,42 @@ function useWindowSize() {
 export default function BarGraphAssists({ playerAverages }) {
   const [windowWidth] = useWindowSize();
   const svgRef = useRef();
-  
-  playerAverages = playerAverages.sort((a, b) => a.year - b.year);
-  
-  useEffect(() => {
-    const MARGINS = { topXL: 30, topL: 20, topM: 20, topS: 10, bottomXL: 15, bottomL: 10, bottomM: 10, bottomS: 5 };
 
-    let CHART_WIDTH = windowWidth > 1400 ? 900 : windowWidth > 700 ? 600 : windowWidth > 350 ? 300 : 150;
-    let CHART_HEIGHT = windowWidth > 1400 ? (600 - MARGINS.topXL - MARGINS.bottomXL) : windowWidth > 700 ? (400 - MARGINS.topL - MARGINS.bottomL) : windowWidth > 350 ? (300 - MARGINS.topM - MARGINS.bottomM) : (100 - MARGINS.topS - MARGINS.bottomS);
-    let tickFontSize = windowWidth > 700 ? "16px" : windowWidth > 350 ? "12px" : "7px";
-    let labelFontSize = windowWidth > 700 ? "14px" : windowWidth > 350 ? "10px" : "6px";
-    
+  playerAverages = playerAverages.sort((a, b) => a.year - b.year);
+
+  useEffect(() => {
+    const MARGINS = {
+      topXL: 30,
+      topL: 20,
+      topM: 20,
+      topS: 10,
+      bottomXL: 15,
+      bottomL: 10,
+      bottomM: 10,
+      bottomS: 5,
+    };
+
+    let CHART_WIDTH =
+      windowWidth > 1400
+        ? 900
+        : windowWidth > 700
+        ? 600
+        : windowWidth > 350
+        ? 300
+        : 150;
+    let CHART_HEIGHT =
+      windowWidth > 1400
+        ? 600 - MARGINS.topXL - MARGINS.bottomXL
+        : windowWidth > 700
+        ? 400 - MARGINS.topL - MARGINS.bottomL
+        : windowWidth > 350
+        ? 300 - MARGINS.topM - MARGINS.bottomM
+        : 100 - MARGINS.topS - MARGINS.bottomS;
+    let tickFontSize =
+      windowWidth > 700 ? "16px" : windowWidth > 350 ? "12px" : "7px";
+    let labelFontSize =
+      windowWidth > 700 ? "14px" : windowWidth > 350 ? "10px" : "6px";
+
     const chartContainer = select(svgRef.current);
 
     chartContainer.selectAll("*").remove();
@@ -37,7 +62,7 @@ export default function BarGraphAssists({ playerAverages }) {
     chartContainer
       .attr("width", CHART_WIDTH)
       .attr("height", CHART_HEIGHT + MARGINS.topL + MARGINS.bottomL);
-    
+
     const chart = chartContainer.append("g");
 
     const xScale = scaleBand().rangeRound([0, CHART_WIDTH]).padding(0.1);
@@ -46,7 +71,12 @@ export default function BarGraphAssists({ playerAverages }) {
     const yScale = scaleLinear().range([CHART_HEIGHT, 0]);
     yScale.domain([0, max(playerAverages, (d) => d.stats[0].assists) + 5]);
 
-    chart.append("g").call(axisBottom(xScale).tickSizeOuter(0)).attr('transform', `translate(0, ${CHART_HEIGHT})`).attr('color', '#3f51b5').attr('font-size', `${tickFontSize}`);
+    chart
+      .append("g")
+      .call(axisBottom(xScale).tickSizeOuter(0))
+      .attr("transform", `translate(0, ${CHART_HEIGHT})`)
+      .attr("color", "#15EA23")
+      .attr("font-size", `${tickFontSize}`);
 
     chart
       .selectAll(".bar")
@@ -63,12 +93,11 @@ export default function BarGraphAssists({ playerAverages }) {
       .data(playerAverages)
       .join("text")
       .text((data) => data.stats[0].assists)
-      .attr("x", data => xScale(data.year) + xScale.bandwidth() / 2)
-      .attr("y", data => yScale(data.stats[0].assists) - 5)
-      .attr('text-anchor', 'middle')
-      .attr('font-size', `${labelFontSize}`)
-      .classed('label', true);
-    
+      .attr("x", (data) => xScale(data.year) + xScale.bandwidth() / 2)
+      .attr("y", (data) => yScale(data.stats[0].assists) - 5)
+      .attr("text-anchor", "middle")
+      .attr("font-size", `${labelFontSize}`)
+      .classed("label", true);
   }, [windowWidth, playerAverages]);
 
   return (

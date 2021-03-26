@@ -5,6 +5,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    borderBottom: "2px solid #EA15DC",
   },
   imgFit: {
     objectFit: "contain",

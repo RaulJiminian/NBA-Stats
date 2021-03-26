@@ -26,9 +26,15 @@ a {
 }
 
 .bar {
-  fill: #3f51b5;
+  fill: #97EE98;
 }
 
 .label {
-  fill: #3f51b5;
+  fill: #15EA23;
+}
+
+@media screen and (max-width: 765px) {
+  .imgFit {
+    display: hidden;
+  }
 }

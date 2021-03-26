@@ -11,9 +11,17 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 345,
   },
+  headingSize: {
+    fontSize: "1.8rem",
+  },
   imgFit: {
     objectFit: "contain",
   },
+  greenText: {
+    color: "#15EA23",
+    fontWeight: 600,
+    fontSize: "16px",
+  }
 });
 
 export default function TeamCardFull( props ) {
@@ -21,7 +29,7 @@ export default function TeamCardFull( props ) {
   const teamInfo = useContext(TeamContext);
   const classes = useStyles();
 
-  const { banner, name } = teamInfo.filter((team) => team.id === teamId)[0];
+  const { banner, name } = teamInfo.find((team) => team.id === teamId);
   
   const currentTeamStanding = teamStandings?.conferences?.find((conference) => conference.id === conferenceId)?.divisions?.find((division) => division.id === divisionId)?.teams?.find((team) => team.id === teamId)
 
@@ -40,10 +48,10 @@ export default function TeamCardFull( props ) {
         title="Team Name"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography gutterBottom variant="h5" component="h2" className={classes.headingSize}>
           {name}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" className={classes.greenText} component="p">
           {wins} Wins - {losses} Losses
         </Typography>
         <MiniRankTable rankings={rankings} />

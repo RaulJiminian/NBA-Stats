@@ -112,6 +112,7 @@ const useToolbarStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
     display: "grid",
+    borderBottom: "2px solid #EA15DC",
   },
   highlight:
     theme.palette.type === "light"
@@ -172,6 +173,10 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  playerName: {
+    color: "#15EA23",
+    fontWeight: 600,
+  }
 }));
 
 export default function TeamRoster({teamSeasonStats}) {
@@ -241,6 +246,7 @@ export default function TeamRoster({teamSeasonStats}) {
                         id={labelId}
                         scope="row"
                         padding="none"
+                        className={classes.playerName}
                       >
                         <Link to={`/players/${row.playerId}`}>
                           {row.name}
