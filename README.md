@@ -20,7 +20,7 @@
 
 Please visit NBA Stats' deployed site:
 
-- [NBA STATS](https://nba-stat.netlify.app)
+- <a href="https://nba-stat.netlify.app" target="_blank" rel="noopener">NBA STATS</a>
 
 ##### * Please note, due to a cross-origin reference error, a CORS extension is necessary to view the site
 
