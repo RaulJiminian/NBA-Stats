@@ -38,7 +38,7 @@ function TeamPage() {
   
   useEffect(() => {
     const fetchTeamProfile = async () => {
-      const urlTeamProfile = `http://api.sportradar.us/nba/trial/v7/en/teams/${teamId}/profile.json?api_key=${API_KEY}`;
+      const urlTeamProfile = `https://api.sportradar.us/nba/trial/v7/en/teams/${teamId}/profile.json?api_key=${API_KEY}`;
       
       const responseProfile = await axios(urlTeamProfile);
       setTeamProfile(responseProfile.data);

@@ -32,7 +32,7 @@ function PlayerPage() {
   useEffect(() => {
     const fetchPlayerProfile = async () => {
       const urlPlayerProfile = `https://api.sportradar.us/nba/trial/v7/en/players/${playerId}/profile.json?api_key=${API_KEY}`;
-      const urlPlayerPhotoId = "http://data.nba.net/data/10s/prod/v1/2020/players.json"
+      const urlPlayerPhotoId = "https://data.nba.net/data/10s/prod/v1/2020/players.json"
 
       const response = await axios(urlPlayerProfile);
       const responsePhotoId = await axios(urlPlayerPhotoId);
